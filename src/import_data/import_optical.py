@@ -9,8 +9,8 @@ from node_setup.optical_nodes import OpticalNodeBuilder
 from node_setup.node_helpers import get_geo_node
 
 
-CLIENT_ID = "sh-76d82ec1-4685-4eb7-aa40-68dad2442b53" # these last until 17 Aug 2025
-CLIENT_SECRET = "sDJLPVySb06wKgmHNsSmMMA7JCLMnNrt" 
+CLIENT_ID = your_client_id_here  # Replace with your actual client ID
+CLIENT_SECRET = your_client_secret_here  # Replace with your actual client secret
 
 
 def run_optical(data_folder, geo=None, date_ranges=None):

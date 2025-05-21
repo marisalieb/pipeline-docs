@@ -6,10 +6,8 @@ from utils.grid_size import get_image_dimensions
 from node_setup.terrain_nodes import DEMNodeBuilder, FallbackNodeBuilder
 from node_setup.node_helpers import get_geo_node
 
-
-CLIENT_ID = "sh-76d82ec1-4685-4eb7-aa40-68dad2442b53" # these last until 17 Aug 2025
-CLIENT_SECRET = "sDJLPVySb06wKgmHNsSmMMA7JCLMnNrt" 
-
+CLIENT_ID = your_client_id_here  # Replace with your actual client ID
+CLIENT_SECRET = your_client_secret_here  # Replace with your actual client secret
 
 def run_terrain(data_folder, geo=None):
     """
