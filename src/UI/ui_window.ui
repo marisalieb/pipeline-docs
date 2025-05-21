@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UiWindow</class>
+ <widget class="QWidget" name="UiWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>310</width>
+    <height>261</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>UI</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="layoutmain">
+     <item row="1" column="0" rowspan="4">
+      <widget class="QGroupBox" name="calender_box">
+       <property name="title">
+        <string>Choose Start/End Date</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QDateEdit" name="start_date">
+          <property name="dateTime">
+           <datetime>
+            <hour>1</hour>
+            <minute>1</minute>
+            <second>15</second>
+            <year>2016</year>
+            <month>1</month>
+            <day>1</day>
+           </datetime>
+          </property>
+          <property name="maximumDate">
+           <date>
+            <year>2025</year>
+            <month>5</month>
+            <day>27</day>
+           </date>
+          </property>
+          <property name="minimumDate">
+           <date>
+            <year>2016</year>
+            <month>1</month>
+            <day>1</day>
+           </date>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="end_date">
+          <property name="dateTime">
+           <datetime>
+            <hour>0</hour>
+            <minute>0</minute>
+            <second>0</second>
+            <year>2016</year>
+            <month>1</month>
+            <day>8</day>
+           </datetime>
+          </property>
+          <property name="maximumDate">
+           <date>
+            <year>2025</year>
+            <month>5</month>
+            <day>31</day>
+           </date>
+          </property>
+          <property name="minimumDate">
+           <date>
+            <year>2016</year>
+            <month>1</month>
+            <day>7</day>
+           </date>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QComboBox" name="weekly_monthly">
+       <property name="placeholderText">
+        <string>weekly</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>weekly</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>monthly</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="datalabel">
+       <property name="text">
+        <string>Data Frequency</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLineEdit" name="lineEdit_browse"/>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="pushButton_browse">
+       <property name="text">
+        <string>Browse Data Folder...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <layout class="QVBoxLayout" name="map_box">
+     <item>
+      <widget class="QPushButton" name="open_map">
+       <property name="text">
+        <string>Open Map</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="load_terrain">
+       <property name="text">
+        <string>Load Terrain</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="load_thermal">
+       <property name="text">
+        <string>Load Temperature Data</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,46 @@
+site_name: Pipeline Project - Climate Visualisation
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+
+nav:
+  - Home: index.md
+
+  - Data Download: 
+    - Base Data: data_download/base.md
+    - Terrain Data: data_download/terrain.md
+    - Optical Data: data_download/optical.md
+    - Temperature Data: data_download/thermal.md
+
+  - Import Data To Houdini: 
+    - Terrain Data Import: import_data/import_terrain.md
+    - Optical Data Import: import_data/import_optical.md
+    - Temperature Data Import: import_data/import_temperature.md
+
+  - Node Setup: 
+    - Node Builder: node_setup/node_builder.md
+    - Node Helpers: node_setup/node_helpers.md
+    - Terrain Nodes: node_setup/terrain_nodes.md
+    - Optical Nodes: node_setup/optical_nodes.md
+    - Temperature Nodes: node_setup/temperature_nodes.md 
+
+  - UI: 
+    - UI Main: UI/main.md    
+ 
+  - Utilities: 
+    - Authentication: utils/auth.md 
+    - Bounding Box: utils/bbox.md 
+    - Date Ranges: utils/date_ranges.md
+    - Delete Images: utils/delete_images.md
+    - Grid Size: utils/grid_size.md
+    - Open Flask Server: utils/open_flask_server.md
+    - Open Map: utils/open_map.md
+    - Post JSON: utils/post_json.md 
+    - Server: utils/server.md   

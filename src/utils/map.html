@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Select Bounding Box</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Leaflet and Geocoder CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+
+  <style>
+    #map { height: 100vh; }
+  
+
+    #resetBtn {
+      position: absolute;
+      top: 150px;         
+      right: 30px;
+      z-index: 1000;
+    }
+  
+    .leaflet-control-layers {
+      top: 10px !important;   
+      right: 10px !important;
+      left: auto !important;
+      z-index: 999;
+    }
+  
+
+    .leaflet-control-geocoder {
+      top: 10px !important;
+      right: 10px !important;
+      left: auto !important;
+      z-index: 1001;
+    }
+
+    #messageBox {
+      position: absolute;
+      top: 30px;
+      right: 330px;
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      padding: 5px 5px;
+      border-radius: 6px;
+      z-index: 1001;
+      display: none;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      font-family: "Arial", sans-serif;
+
+    }
+  </style>
+  
+</head>
+<body>
+  <button id="resetBtn">
+    Reset Selection
+  </button>
+  <div id="messageBox">Bounding box saved! Return to Houdini!</div>
+
+  <div id="map"></div>
+
+  <!-- Leaflet and Geocoder JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+  <script>
+    const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    });
+
+    const satellite = L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      {
+        attribution: 'Tiles © Esri'
+      }
+    );
+
+
+    const map = L.map('map').setView([0, 0], 2); 
+
+    osm.addTo(map);
+
+    // Add geocoder for search functionality
+    L.Control.geocoder({
+      defaultMarkGeocode: true
+    }).addTo(map);
+
+    // Layer control (to toggle between base map and satellite overlay)
+    const baseMaps = {
+      "Street Map": osm,  
+    };
+
+    const overlayMaps = {
+      "Satellite Imagery": satellite  // Satellite overlay
+    };
+
+
+    L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+    let corners = [];
+    let markers = [];
+    let rectangle = null;
+
+    function saveToFile(coords) {
+      fetch("http://127.0.0.1:5001/save-coords", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(coords)
+      });
+    }
+
+    map.on('click', function(e) {
+      if (corners.length < 2) {
+        const marker = L.marker(e.latlng).addTo(map);
+        markers.push(marker);
+        corners.push([e.latlng.lat, e.latlng.lng]);
+      }
+
+      if (corners.length === 2) {
+        const bounds = [
+          [Math.min(corners[0][0], corners[1][0]), Math.min(corners[0][1], corners[1][1])],
+          [Math.max(corners[0][0], corners[1][0]), Math.max(corners[0][1], corners[1][1])]
+        ];
+
+        // Draw rectangle on map
+        rectangle = L.rectangle(bounds, {
+          color: "#888",
+          weight: 1,
+          fillOpacity: 0.2
+        }).addTo(map);
+
+        saveToFile({
+          lat_min: bounds[0][0],
+          lat_max: bounds[1][0],
+          lon_min: bounds[0][1],
+          lon_max: bounds[1][1]
+        });
+
+        const messageBox = document.getElementById("messageBox");
+        messageBox.style.display = "block";
+        setTimeout(() => {
+          messageBox.style.display = "none";
+        }, 3000); // hide after 4 seconds
+
+      }
+
+    });
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      corners = [];
+      markers.forEach(marker => map.removeLayer(marker));
+      markers = [];
+
+      if (rectangle) {
+        map.removeLayer(rectangle);
+        rectangle = null;
+      }
+    });
+
+  </script>
+</body>
+</html>

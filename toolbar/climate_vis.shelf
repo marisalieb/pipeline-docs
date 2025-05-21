@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shelfDocument>
+
+  <toolshelf name="climate_vis" label="Climate Visualisation">
+    <memberTool name="climate_vis_tool"/>
+  </toolshelf>
+</shelfDocument>

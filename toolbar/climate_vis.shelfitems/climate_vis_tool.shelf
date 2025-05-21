@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shelfDocument>
+
+  <tool name="climate_vis_tool" label="Climate Vis" icon="$CLIMATE_VIS_DIR/icons/earth.png">
+    <script scriptType="python"><![CDATA[
+import hou
+import sys
+
+src_path = hou.expandString("$CLIMATE_VIS_DIR/src")
+if src_path not in sys.path:
+    sys.path.append(src_path)
+    
+from UI.main import run_ui
+
+run_ui()
+]]></script>
+  </tool>
+</shelfDocument>
